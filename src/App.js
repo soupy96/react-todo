@@ -1,17 +1,17 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
 
-const MainApp = React.lazy(() => import('./pages/MainApp'));
-const NoPage = React.lazy(() => import('./pages/NoPage'));
+import AddTask from './components/AddTask';
+import TaskList from './components/TaskList';
+import DeleteButts from './components/DeleteButts';
+import TodoProvider from './store/TodoProvider';
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<MainApp />}>
-        <Route index element={<MainApp />} />
-        <Route path='*' element={<NoPage />} />
-      </Route>
-    </Routes>
+    <TodoProvider>
+      <AddTask />
+      <TaskList />
+      <DeleteButts />
+    </TodoProvider>
   );
 }
 
