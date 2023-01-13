@@ -8,17 +8,17 @@ import SingleTask from './SingleTask';
 const TaskList = () => {
   const todoCtx = useContext(TodoContext);
 
-  const todoRemoveHandler = (id) => {
-    todoCtx.removeTodo(id);
-  };
+  // const todoRemoveHandler = (id) => {
+  //   todoCtx.removeTodo(id);
+  // };
 
-  const todoAddHandler = (id) => {
-    todoCtx.addTodo(id);
-  };
+  // const todoAddHandler = (id) => {
+  //   todoCtx.addTodo(id);
+  // };
 
-  const todoEditHandler = (id) => {
-    todoCtx.editTodo(id);
-  };
+  // const todoEditHandler = (id) => {
+  //   todoCtx.editTodo(id);
+  // };
 
   return (
     <div>
