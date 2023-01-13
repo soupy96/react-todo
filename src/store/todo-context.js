@@ -1,11 +1,13 @@
 import React from 'react';
 
 const TodoContext = React.createContext({
-  // TODO: create all the items that i'm going to be tracking
-  //   items: [],
-  //   totalAmount: 0,
-  //   addItem: (item) => {},
-  //   removeItem: (id) => {},
+  todos: [
+    { name: 'cooking', complete: false },
+    { name: 'playing', complete: true },
+  ],
+  addTodo: (item) => {},
+  removeTodo: (id) => {},
+  editTodo: (id) => {},
 });
 
 export default TodoContext;
