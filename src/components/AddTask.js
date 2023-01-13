@@ -3,8 +3,9 @@ import Button from '@mui/material/Button';
 
 import { MainBox, WhiteH1 } from './ReusableCss';
 
-function AddTask() {
+const AddTask = () => {
   // TODO: add form validation
+
   return (
     <div>
       <WhiteH1>Todo App</WhiteH1>
@@ -22,6 +23,6 @@ function AddTask() {
       </MainBox>
     </div>
   );
-}
+};
 
 export default AddTask;

@@ -1,41 +1,37 @@
-import { Checkbox, IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import React, { useContext } from 'react';
 
-import { MainBox, SingleTask, TaskIcons } from './ReusableCss';
+import { MainBox } from './ReusableCss';
 
-function TaskList() {
+import TodoContext from '../store/todo-context';
+import SingleTask from './SingleTask';
+
+const TaskList = () => {
+  const todoCtx = useContext(TodoContext);
+
+  const todoRemoveHandler = (id) => {
+    todoCtx.removeTodo(id);
+  };
+
+  const todoAddHandler = (id) => {
+    todoCtx.addTodo(id);
+  };
+
+  const todoEditHandler = (id) => {
+    todoCtx.editTodo(id);
+  };
+
   return (
     <div>
       <MainBox>
         <h1 style={{ marginTop: 0 }}>Todo List</h1>
-        <SingleTask>
-          <p style={{ textDecorationLine: 'line-through' }}>learn react</p>
-          <TaskIcons>
-            <Checkbox defaultChecked />
-            <IconButton aria-label='edit'>
-              <EditIcon />
-            </IconButton>
-            <IconButton aria-label='delete'>
-              <DeleteIcon />
-            </IconButton>
-          </TaskIcons>
-        </SingleTask>
-        <SingleTask>
-          <p>learn react</p>
-          <TaskIcons>
-            <Checkbox />
-            <IconButton aria-label='edit'>
-              <EditIcon />
-            </IconButton>
-            <IconButton aria-label='delete'>
-              <DeleteIcon />
-            </IconButton>
-          </TaskIcons>
-        </SingleTask>
+        <ul>
+          {todoCtx.todos.map((todo, index) => (
+            <SingleTask key={index} name={todo.name} complete={todo.complete} />
+          ))}
+        </ul>
       </MainBox>
     </div>
   );
-}
+};
 
 export default TaskList;

@@ -13,7 +13,7 @@ export const WhiteH1 = styled.h1`
   color: #ffffff;
 `;
 
-export const SingleTask = styled.div`
+export const SingleTaskCSS = styled.div`
   border: 2px solid grey;
   border-radius: 15px;
   padding: 0px 10px 0px 10px;

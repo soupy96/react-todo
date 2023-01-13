@@ -5,7 +5,7 @@ import TaskList from './components/TaskList';
 import DeleteButts from './components/DeleteButts';
 import TodoProvider from './store/TodoProvider';
 
-function App() {
+const App = () => {
   return (
     <TodoProvider>
       <AddTask />
@@ -13,6 +13,6 @@ function App() {
       <DeleteButts />
     </TodoProvider>
   );
-}
+};
 
 export default App;
