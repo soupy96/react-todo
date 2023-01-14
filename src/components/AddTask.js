@@ -1,25 +1,47 @@
+import { useContext, useState } from 'react';
+
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
+import TodoContext from '../store/todo-context';
 
 import { MainBox, WhiteH1 } from './ReusableCss';
 
 const AddTask = () => {
-  // TODO: add form validation
+  const [value, setValue] = useState('');
+  const [todoId, setId] = useState(0);
+
+  const todoCtx = useContext(TodoContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!value) {
+      return;
+    }
+    let test = todoId;
+    todoCtx.addTodo({ numId: test, value, complete: false });
+    test++;
+    setId(test);
+    setValue('');
+  };
 
   return (
     <div>
       <WhiteH1>Todo App</WhiteH1>
       <MainBox>
-        <TextField
-          fullWidth
-          id='outlined-basic'
-          label='Add Todo'
-          variant='outlined'
-          style={{ marginBottom: 15 }}
-        />
-        <Button fullWidth variant='contained'>
-          Add New Task
-        </Button>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            id='outlined-basic'
+            label='Add Todo'
+            variant='outlined'
+            style={{ marginBottom: 15 }}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <Button fullWidth variant='contained' type='submit'>
+            Add New Task
+          </Button>
+        </form>
       </MainBox>
     </div>
   );

@@ -4,23 +4,54 @@ import TodoContext from './todo-context';
 
 const defaultTodoState = {
   todos: [
-    { name: 'cooking', complete: false },
-    { name: 'playing', complete: true },
+    // { numId: 0, value: 'michael', complete: false },
+    // { numId: 1, value: 'robyn', complete: false },
+    // { numId: 2, value: 'reese', complete: false },
   ],
 };
 
 const todoReducer = (state, action) => {
   if (action.type === 'ADD_TODO') {
+    const updatedTodos = state.todos.concat(action.todo);
+    console.log('added todo');
+    console.log(updatedTodos);
+    return {
+      todos: updatedTodos,
+    };
   }
   if (action.type === 'CHECK_TODO') {
+    console.log('checked todo');
+    return {
+      todos: state.todos,
+    };
   }
   if (action.type === 'EDIT_TODO') {
+    console.log('edit todo');
+    return {
+      todos: state.todos,
+    };
   }
   if (action.type === 'DELETE_SINGLE_TODO') {
+    let updatedTodos;
+    updatedTodos = state.todos.filter((todo) => todo.numId !== action.numId);
+    console.log('deleted todo');
+    console.log(updatedTodos);
+    return {
+      todos: updatedTodos,
+    };
   }
   if (action.type === 'DELETE_ALL_DONE_TODO') {
+    console.log('delete all done todo');
+    return {
+      todos: state.todos,
+    };
   }
   if (action.type === 'DELETE_ALL_TODO') {
+    console.log('deleted all todos');
+    console.log(state.todos);
+    return {
+      todos: [],
+    };
   }
   return defaultTodoState;
 };
@@ -31,28 +62,28 @@ const TodoProvider = (props) => {
     defaultTodoState
   );
 
-  const addTodoHandler = (id) => {
-    dispatchTodoAction({ type: 'ADD_TODO', id: id });
+  const addTodoHandler = (todo) => {
+    dispatchTodoAction({ type: 'ADD_TODO', todo: todo });
   };
 
-  const checkTodoHandler = (id) => {
-    dispatchTodoAction({ type: 'CHECK_TODO', id: id });
+  const checkTodoHandler = (numId) => {
+    dispatchTodoAction({ type: 'CHECK_TODO', numId: numId });
   };
 
-  const editTodoHandler = (id) => {
-    dispatchTodoAction({ type: 'EDIT_TODO', id: id });
+  const editTodoHandler = (numId) => {
+    dispatchTodoAction({ type: 'EDIT_TODO', numId: numId });
   };
 
-  const deleteSingleTodoHandler = (id) => {
-    dispatchTodoAction({ type: 'DELETE_SINGLE_TODO', id: id });
+  const deleteSingleTodoHandler = (numId) => {
+    dispatchTodoAction({ type: 'DELETE_SINGLE_TODO', numId: numId });
   };
 
-  const deleteAllDoneTodoHandler = (id) => {
-    dispatchTodoAction({ type: 'DELETE_ALL_DONE_TODO', id: id });
+  const deleteAllDoneTodoHandler = (numId) => {
+    dispatchTodoAction({ type: 'DELETE_ALL_DONE_TODO', numId: numId });
   };
 
-  const deleteAllTodoHandler = (id) => {
-    dispatchTodoAction({ type: 'DELETE_ALL_TODO', id: id });
+  const deleteAllTodoHandler = (numId) => {
+    dispatchTodoAction({ type: 'DELETE_ALL_TODO', numId: numId });
   };
 
   const todoContext = {

@@ -1,11 +1,29 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
-import Button from '@mui/material/Button';
+
+import TodoContext from '../store/todo-context';
+import DeleteAllTasks from './DeleteAllTasks';
+import DeleteDoneTasks from './DeleteDoneTasks';
 
 const DeleteButts = () => {
+  const todoCtx = useContext(TodoContext);
+
+  const todoDeleteDoneHandler = (id) => {
+    todoCtx.deleteAllDoneTodo(id);
+  };
+
+  const todoDeleteAllHandler = (numId) => {
+    todoCtx.deleteAllTodo(numId);
+  };
+
   return (
     <DeleteButtBox>
-      <Button variant='contained'>Delete done tasks</Button>
-      <Button variant='contained'>Delete all tasks</Button>
+      <DeleteDoneTasks
+        onDeleteAllDone={todoDeleteDoneHandler.bind(null, todoCtx.todos.numId)}
+      />
+      <DeleteAllTasks
+        onDeleteAll={todoDeleteAllHandler.bind(null, todoCtx.todos.numId)}
+      />
     </DeleteButtBox>
   );
 };

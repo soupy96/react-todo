@@ -1,13 +1,13 @@
 import React from 'react';
 
 const TodoContext = React.createContext({
-  todos: [
-    { name: 'cooking', complete: false },
-    { name: 'playing', complete: true },
-  ],
-  addTodo: (item) => {},
-  removeTodo: (id) => {},
-  editTodo: (id) => {},
+  todos: [],
+  addTodo: (todo) => {},
+  checkTodo: (numId) => {},
+  editTodo: (numId) => {},
+  deleteSingleTodo: (numId) => {},
+  deleteAllDoneTodo: (numId) => {},
+  deleteAllTodo: (numId) => {},
 });
 
 export default TodoContext;

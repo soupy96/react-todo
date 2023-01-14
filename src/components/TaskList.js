@@ -8,25 +8,33 @@ import SingleTask from './SingleTask';
 const TaskList = () => {
   const todoCtx = useContext(TodoContext);
 
-  // const todoRemoveHandler = (id) => {
-  //   todoCtx.removeTodo(id);
-  // };
+  const todoCheckedHandler = (numId) => {
+    todoCtx.checkTodo(numId);
+  };
 
-  // const todoAddHandler = (id) => {
-  //   todoCtx.addTodo(id);
-  // };
+  const todoEditHandler = (numId) => {
+    todoCtx.editTodo(numId);
+  };
 
-  // const todoEditHandler = (id) => {
-  //   todoCtx.editTodo(id);
-  // };
+  const todoRemoveHandler = (numId) => {
+    todoCtx.deleteSingleTodo(numId);
+  };
 
   return (
     <div>
       <MainBox>
         <h1 style={{ marginTop: 0 }}>Todo List</h1>
         <ul>
-          {todoCtx.todos.map((todo, index) => (
-            <SingleTask key={index} name={todo.name} complete={todo.complete} />
+          {todoCtx.todos.map((todo) => (
+            <SingleTask
+              key={todo.numId}
+              numId={todo.numId}
+              name={todo.value}
+              complete={todo.complete}
+              onChecked={todoCheckedHandler.bind(null, todo.numId)}
+              onEdit={todoEditHandler.bind(null, todo.numId)}
+              onRemove={todoRemoveHandler.bind(null, todo.numId)}
+            />
           ))}
         </ul>
       </MainBox>

@@ -12,13 +12,20 @@ const SingleTask = (props) => {
       ) : (
         <p>{props.name}</p>
       )}
-
       <TaskIcons>
-        {props.complete ? <Checkbox defaultChecked /> : <Checkbox />}
-        <IconButton aria-label='edit'>
+        <Checkbox onClick={props.onChecked} />
+        <IconButton
+          aria-label='edit'
+          numId={props.numId}
+          onClick={props.onEdit}
+        >
           <EditIcon />
         </IconButton>
-        <IconButton aria-label='delete'>
+        <IconButton
+          aria-label='delete'
+          numId={props.numId}
+          onClick={props.onRemove}
+        >
           <DeleteIcon />
         </IconButton>
       </TaskIcons>
