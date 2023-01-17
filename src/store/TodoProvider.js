@@ -4,9 +4,9 @@ import TodoContext from './todo-context';
 
 const defaultTodoState = {
   todos: [
-    // { numId: 0, value: 'michael', complete: false },
-    // { numId: 1, value: 'robyn', complete: false },
-    // { numId: 2, value: 'reese', complete: true },
+    { numId: 0, value: 'michael', complete: false },
+    { numId: 1, value: 'robyn', complete: true },
+    { numId: 2, value: 'reese', complete: true },
   ],
 };
 
@@ -49,12 +49,8 @@ const todoReducer = (state, action) => {
   }
   if (action.type === 'DELETE_ALL_DONE_TODO') {
     console.log('delete all done todo');
-    const updatedTodos = [...state.todos];
-    updatedTodos.forEach((todo, index) => {
-      if (todo.complete) {
-        updatedTodos.splice(index, 1);
-      }
-    });
+    let updatedTodos = [...state.todos];
+    updatedTodos = updatedTodos.filter((todo) => !todo.complete);
     return {
       todos: updatedTodos,
     };
