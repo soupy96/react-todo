@@ -4,9 +4,9 @@ import TodoContext from './todo-context';
 
 const defaultTodoState = {
   todos: [
-    { numId: 0, value: 'michael', complete: false },
-    { numId: 1, value: 'robyn', complete: true },
-    { numId: 2, value: 'reese', complete: true },
+    // { numId: 0, value: 'michael', complete: false },
+    // { numId: 1, value: 'robyn', complete: true },
+    // { numId: 2, value: 'reese', complete: true },
   ],
 };
 
