@@ -25,6 +25,7 @@ const TaskList = () => {
       <MainBox>
         <h1 style={{ marginTop: 0 }}>Todo List</h1>
         <ul>
+          {/* TODO: write something when there are no todos */}
           {todoCtx.todos.map((todo) => (
             <SingleTask
               key={todo.numId}

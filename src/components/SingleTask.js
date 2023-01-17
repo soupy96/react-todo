@@ -13,7 +13,11 @@ const SingleTask = (props) => {
         <p>{props.name}</p>
       )}
       <TaskIcons>
-        <Checkbox onClick={props.onChecked} />
+        {props.complete ? (
+          <Checkbox checked numId={props.numId} onChange={props.onChecked} />
+        ) : (
+          <Checkbox numId={props.numId} onChange={props.onChecked} />
+        )}
         <IconButton
           aria-label='edit'
           numId={props.numId}

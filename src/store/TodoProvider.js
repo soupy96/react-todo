@@ -4,51 +4,63 @@ import TodoContext from './todo-context';
 
 const defaultTodoState = {
   todos: [
-    // { numId: 0, value: 'michael', complete: false },
-    // { numId: 1, value: 'robyn', complete: false },
-    // { numId: 2, value: 'reese', complete: false },
+    { numId: 0, value: 'michael', complete: false },
+    { numId: 1, value: 'robyn', complete: false },
+    { numId: 2, value: 'reese', complete: true },
   ],
 };
 
 const todoReducer = (state, action) => {
   if (action.type === 'ADD_TODO') {
-    const updatedTodos = state.todos.concat(action.todo);
     console.log('added todo');
-    console.log(updatedTodos);
+    const updatedTodos = [...state.todos];
+    const newUpdatedTodos = updatedTodos.concat(action.todo);
     return {
-      todos: updatedTodos,
+      todos: newUpdatedTodos,
     };
   }
   if (action.type === 'CHECK_TODO') {
     console.log('checked todo');
+    const updatedTodos = [...state.todos];
+    updatedTodos.forEach((todo, index) => {
+      if (index === action.numId) {
+        todo.complete = !todo.complete;
+      }
+    });
     return {
-      todos: state.todos,
+      todos: updatedTodos,
     };
   }
   if (action.type === 'EDIT_TODO') {
     console.log('edit todo');
+    const updatedTodos = [...state.todos];
+    console.log(updatedTodos[action.numId].value);
     return {
       todos: state.todos,
     };
   }
   if (action.type === 'DELETE_SINGLE_TODO') {
-    let updatedTodos;
-    updatedTodos = state.todos.filter((todo) => todo.numId !== action.numId);
     console.log('deleted todo');
-    console.log(updatedTodos);
+    let updatedTodos = [...state.todos];
+    updatedTodos = updatedTodos.filter((todo) => todo.numId !== action.numId);
     return {
       todos: updatedTodos,
     };
   }
   if (action.type === 'DELETE_ALL_DONE_TODO') {
     console.log('delete all done todo');
+    const updatedTodos = [...state.todos];
+    updatedTodos.forEach((todo, index) => {
+      if (todo.complete) {
+        updatedTodos.splice(index, 1);
+      }
+    });
     return {
-      todos: state.todos,
+      todos: updatedTodos,
     };
   }
   if (action.type === 'DELETE_ALL_TODO') {
     console.log('deleted all todos');
-    console.log(state.todos);
     return {
       todos: [],
     };
