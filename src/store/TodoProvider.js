@@ -10,6 +10,10 @@ const defaultTodoState = {
   ],
 };
 
+// TODO: fix bug where if you delete all tasks, add a new task and check that task off the text doesnt get a strike through
+// TODO: fix the issue where if a lot of tasks are added make the top of the todo app be centered and the rest put below it
+// TODO: add new task to the beginning of the task list rather than the bottom
+
 const todoReducer = (state, action) => {
   if (action.type === 'ADD_TODO') {
     console.log('added todo');
