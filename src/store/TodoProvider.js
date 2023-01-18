@@ -4,25 +4,22 @@ import TodoContext from './todo-context';
 
 const defaultTodoState = {
   todos: [
-    { numId: 0, value: 'michael', complete: false, edit: false, editValue: '' },
-    { numId: 1, value: 'robyn', complete: true, edit: false, editValue: '' },
-    { numId: 2, value: 'reese', complete: true, edit: false, editValue: '' },
+    // { numId: 0, value: 'michael', complete: false, edit: false },
+    // { numId: 1, value: 'robyn', complete: true, edit: false },
+    // { numId: 2, value: 'reese', complete: true, edit: false },
   ],
 };
 
 const todoReducer = (state, action) => {
   if (action.type === 'ADD_TODO') {
-    console.log('added todo');
     const updatedTodos = [...state.todos];
     // this line below adds to the beginning of the todos array
     updatedTodos.unshift(action.todo);
-    console.log(updatedTodos);
     return {
       todos: updatedTodos,
     };
   }
   if (action.type === 'CHECK_TODO') {
-    console.log('checked todo');
     const updatedTodos = [...state.todos];
     updatedTodos.forEach((todo) => {
       if (todo.numId === action.numId) {
@@ -34,16 +31,10 @@ const todoReducer = (state, action) => {
     };
   }
   if (action.type === 'EDIT_TODO') {
-    console.log('edit todo');
     const updatedTodos = [...state.todos];
     updatedTodos.forEach((todo) => {
-      if (todo.numId === action.numId) {
-        // if (todo.edit === true) {
-        //   todo.edit = !todo.edit;
-        //   todo.value = action.value;
-        // } else {
+      if (todo.numId === action.todo.numId) {
         todo.edit = !todo.edit;
-        // }
       }
     });
     return {
@@ -51,16 +42,11 @@ const todoReducer = (state, action) => {
     };
   }
   if (action.type === 'SAVE_TODO') {
-    console.log('saved todo');
     const updatedTodos = [...state.todos];
     updatedTodos.forEach((todo) => {
       if (todo.numId === action.numId) {
-        // if (todo.edit === true) {
-        //   todo.edit = !todo.edit;
-        //   todo.value = action.value;
-        // } else {
         todo.edit = !todo.edit;
-        // }
+        todo.value = action.value;
       }
     });
     return {
@@ -68,7 +54,6 @@ const todoReducer = (state, action) => {
     };
   }
   if (action.type === 'DELETE_SINGLE_TODO') {
-    console.log('deleted todo');
     let updatedTodos = [...state.todos];
     updatedTodos = updatedTodos.filter((todo) => todo.numId !== action.numId);
     return {
@@ -76,7 +61,6 @@ const todoReducer = (state, action) => {
     };
   }
   if (action.type === 'DELETE_ALL_DONE_TODO') {
-    console.log('delete all done todo');
     let updatedTodos = [...state.todos];
     updatedTodos = updatedTodos.filter((todo) => !todo.complete);
     return {
@@ -84,7 +68,6 @@ const todoReducer = (state, action) => {
     };
   }
   if (action.type === 'DELETE_ALL_TODO') {
-    console.log('deleted all todos');
     return {
       todos: [],
     };
@@ -106,12 +89,12 @@ const TodoProvider = (props) => {
     dispatchTodoAction({ type: 'CHECK_TODO', numId: numId });
   };
 
-  const editTodoHandler = (numId) => {
-    dispatchTodoAction({ type: 'EDIT_TODO', numId: numId });
+  const editTodoHandler = (todo) => {
+    dispatchTodoAction({ type: 'EDIT_TODO', todo: todo });
   };
 
-  const saveTodoHandler = (editValue) => {
-    dispatchTodoAction({ type: 'SAVE_TODO', editValue: editValue });
+  const saveTodoHandler = (numId, value) => {
+    dispatchTodoAction({ type: 'SAVE_TODO', numId: numId, value: value });
   };
 
   const deleteSingleTodoHandler = (numId) => {

@@ -12,12 +12,8 @@ const TaskList = () => {
     todoCtx.checkTodo(numId);
   };
 
-  const todoEditHandler = (numId) => {
-    todoCtx.editTodo(numId);
-  };
-
-  const todoSaveHandler = (editValue) => {
-    todoCtx.saveTodo(editValue);
+  const todoEditHandler = (todo) => {
+    todoCtx.editTodo(todo);
   };
 
   const todoRemoveHandler = (numId) => {
@@ -36,13 +32,11 @@ const TaskList = () => {
               <SingleTask
                 key={todo.numId}
                 numId={todo.numId}
-                name={todo.value}
+                value={todo.value}
                 complete={todo.complete}
                 edit={todo.edit}
-                editValue={todo.editValue}
                 onChecked={todoCheckedHandler.bind(null, todo.numId)}
-                onEdit={todoEditHandler.bind(null, todo.numId)}
-                onSave={todoSaveHandler.bind(null, todo.editValue)}
+                onEdit={todoEditHandler.bind(null, todo)}
                 onRemove={todoRemoveHandler.bind(null, todo.numId)}
               />
             ))

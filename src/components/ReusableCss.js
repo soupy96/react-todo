@@ -28,3 +28,10 @@ export const TaskIcons = styled.div`
   justify-content: space-evenly;
   align-items: center;
 `;
+
+export const EditForm = styled.form`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;

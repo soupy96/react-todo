@@ -3,31 +3,49 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 
-import { SingleTaskCSS, TaskIcons } from './ReusableCss';
-// import { useState } from 'react';
+import { SingleTaskCSS, TaskIcons, EditForm } from './ReusableCss';
+import { useContext, useState } from 'react';
+
+import TodoContext from '../store/todo-context';
 
 const SingleTask = (props) => {
-  // const [editValue, setEditValue] = useState(props.name);
+  const [value, setValue] = useState(props.value);
+
+  const todoCtx = useContext(TodoContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!value) {
+      alert('Please enter a valid todo task.');
+      return;
+    }
+    todoCtx.saveTodo(props.numId, value);
+  };
 
   return (
     <div>
       <SingleTaskCSS>
         {props.edit ? (
-          <TextField
-            fullWidth
-            id='outlined-basic'
-            variant='standard'
-            style={{ marginBottom: 15 }}
-            // value={props.name}
-            // value={props.editValue}
-            onChange={(e) => {
-              props.editValue = e.target.value;
-            }}
-          />
+          <EditForm onSubmit={handleSubmit}>
+            <TextField
+              fullWidth
+              focused
+              id='outlined-basic'
+              variant='standard'
+              value={value}
+              onChange={(e) => {
+                setValue(e.target.value);
+              }}
+              style={{ marginBottom: 15, marginTop: 15 }}
+            />
+            <IconButton aria-label='edit' numid={props.numId} type='submit'>
+              <SaveIcon aria-label='edit' numid={props.numId} />
+            </IconButton>
+          </EditForm>
         ) : !props.edit && props.complete ? (
-          <p style={{ textDecorationLine: 'line-through' }}>{props.name}</p>
+          <p style={{ textDecorationLine: 'line-through' }}>{props.value}</p>
         ) : (
-          <p>{props.name}</p>
+          <p>{props.value}</p>
         )}
         <TaskIcons>
           {props.complete ? (
@@ -35,23 +53,13 @@ const SingleTask = (props) => {
           ) : (
             <Checkbox numid={props.numId} onChange={props.onChecked} />
           )}
-          {props.edit ? (
-            <IconButton aria-label='edit' numid={props.numId}>
-              <SaveIcon
-                aria-label='edit'
-                numid={props.numId}
-                onClick={props.onSave}
-              />
-            </IconButton>
-          ) : (
-            <IconButton
-              aria-label='edit'
-              numid={props.numId}
-              onClick={props.onEdit}
-            >
-              <EditIcon />
-            </IconButton>
-          )}
+          <IconButton
+            aria-label='edit'
+            numid={props.numId}
+            onClick={props.onEdit}
+          >
+            <EditIcon />
+          </IconButton>
           <IconButton
             aria-label='delete'
             numid={props.numId}
