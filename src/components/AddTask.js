@@ -17,10 +17,16 @@ const AddTask = () => {
     if (!value) {
       return;
     }
-    let test = todoId;
-    todoCtx.addTodo({ numId: test, value, complete: false });
-    test++;
-    setId(test);
+    let numId = todoId;
+    todoCtx.addTodo({
+      numId: numId,
+      value,
+      complete: false,
+      edit: false,
+      editValue: '',
+    });
+    numId++;
+    setId(numId);
     setValue('');
   };
 

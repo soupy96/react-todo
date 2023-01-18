@@ -5,6 +5,7 @@ const TodoContext = React.createContext({
   addTodo: (todo) => {},
   checkTodo: (numId) => {},
   editTodo: (numId) => {},
+  saveTodo: (editValue) => {},
   deleteSingleTodo: (numId) => {},
   deleteAllDoneTodo: (numId) => {},
   deleteAllTodo: (numId) => {},

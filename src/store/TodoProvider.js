@@ -4,9 +4,9 @@ import TodoContext from './todo-context';
 
 const defaultTodoState = {
   todos: [
-    // { numId: 0, value: 'michael', complete: false },
-    // { numId: 1, value: 'robyn', complete: true },
-    // { numId: 2, value: 'reese', complete: true },
+    { numId: 0, value: 'michael', complete: false, edit: false, editValue: '' },
+    { numId: 1, value: 'robyn', complete: true, edit: false, editValue: '' },
+    { numId: 2, value: 'reese', complete: true, edit: false, editValue: '' },
   ],
 };
 
@@ -16,6 +16,7 @@ const todoReducer = (state, action) => {
     const updatedTodos = [...state.todos];
     // this line below adds to the beginning of the todos array
     updatedTodos.unshift(action.todo);
+    console.log(updatedTodos);
     return {
       todos: updatedTodos,
     };
@@ -35,9 +36,35 @@ const todoReducer = (state, action) => {
   if (action.type === 'EDIT_TODO') {
     console.log('edit todo');
     const updatedTodos = [...state.todos];
-    console.log(updatedTodos[action.numId].value);
+    updatedTodos.forEach((todo) => {
+      if (todo.numId === action.numId) {
+        // if (todo.edit === true) {
+        //   todo.edit = !todo.edit;
+        //   todo.value = action.value;
+        // } else {
+        todo.edit = !todo.edit;
+        // }
+      }
+    });
     return {
-      todos: state.todos,
+      todos: updatedTodos,
+    };
+  }
+  if (action.type === 'SAVE_TODO') {
+    console.log('saved todo');
+    const updatedTodos = [...state.todos];
+    updatedTodos.forEach((todo) => {
+      if (todo.numId === action.numId) {
+        // if (todo.edit === true) {
+        //   todo.edit = !todo.edit;
+        //   todo.value = action.value;
+        // } else {
+        todo.edit = !todo.edit;
+        // }
+      }
+    });
+    return {
+      todos: updatedTodos,
     };
   }
   if (action.type === 'DELETE_SINGLE_TODO') {
@@ -83,6 +110,10 @@ const TodoProvider = (props) => {
     dispatchTodoAction({ type: 'EDIT_TODO', numId: numId });
   };
 
+  const saveTodoHandler = (editValue) => {
+    dispatchTodoAction({ type: 'SAVE_TODO', editValue: editValue });
+  };
+
   const deleteSingleTodoHandler = (numId) => {
     dispatchTodoAction({ type: 'DELETE_SINGLE_TODO', numId: numId });
   };
@@ -100,6 +131,7 @@ const TodoProvider = (props) => {
     addTodo: addTodoHandler,
     checkTodo: checkTodoHandler,
     editTodo: editTodoHandler,
+    saveTodo: saveTodoHandler,
     deleteSingleTodo: deleteSingleTodoHandler,
     deleteAllDoneTodo: deleteAllDoneTodoHandler,
     deleteAllTodo: deleteAllTodoHandler,
