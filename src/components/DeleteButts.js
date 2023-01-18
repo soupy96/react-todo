@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import TodoContext from '../store/todo-context';
 import DeleteAllTasks from './DeleteAllTasks';
 import DeleteDoneTasks from './DeleteDoneTasks';
+import { DeleteButtBox } from './ReusableCss';
 
 const DeleteButts = () => {
   const todoCtx = useContext(TodoContext);
@@ -27,12 +28,5 @@ const DeleteButts = () => {
     </DeleteButtBox>
   );
 };
-
-const DeleteButtBox = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
 
 export default DeleteButts;

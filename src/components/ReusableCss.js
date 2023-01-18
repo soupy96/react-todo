@@ -7,6 +7,10 @@ export const MainBox = styled.div`
   background-color: #ffffff;
   margin-bottom: 50px;
   width: 500px;
+
+  @media only screen and (max-width: 600px) {
+    width: 90%;
+  }
 `;
 
 export const WhiteH1 = styled.h1`
@@ -34,4 +38,18 @@ export const EditForm = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const DeleteButtBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  @media only screen and (max-width: 600px) {
+    height: 100px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
