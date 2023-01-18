@@ -2,12 +2,10 @@ import React, { useReducer } from 'react';
 
 import TodoContext from './todo-context';
 
+const localTodos = JSON.parse(localStorage.getItem('todos'));
+
 const defaultTodoState = {
-  todos: [
-    // { numId: 0, value: 'michael', complete: false, edit: false },
-    // { numId: 1, value: 'robyn', complete: true, edit: false },
-    // { numId: 2, value: 'reese', complete: true, edit: false },
-  ],
+  todos: localTodos,
 };
 
 const todoReducer = (state, action) => {
@@ -15,6 +13,7 @@ const todoReducer = (state, action) => {
     const updatedTodos = [...state.todos];
     // this line below adds to the beginning of the todos array
     updatedTodos.unshift(action.todo);
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
     return {
       todos: updatedTodos,
     };
@@ -26,6 +25,7 @@ const todoReducer = (state, action) => {
         todo.complete = !todo.complete;
       }
     });
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
     return {
       todos: updatedTodos,
     };
@@ -37,6 +37,7 @@ const todoReducer = (state, action) => {
         todo.edit = !todo.edit;
       }
     });
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
     return {
       todos: updatedTodos,
     };
@@ -49,6 +50,7 @@ const todoReducer = (state, action) => {
         todo.value = action.value;
       }
     });
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
     return {
       todos: updatedTodos,
     };
@@ -56,6 +58,7 @@ const todoReducer = (state, action) => {
   if (action.type === 'DELETE_SINGLE_TODO') {
     let updatedTodos = [...state.todos];
     updatedTodos = updatedTodos.filter((todo) => todo.numId !== action.numId);
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
     return {
       todos: updatedTodos,
     };
@@ -63,13 +66,17 @@ const todoReducer = (state, action) => {
   if (action.type === 'DELETE_ALL_DONE_TODO') {
     let updatedTodos = [...state.todos];
     updatedTodos = updatedTodos.filter((todo) => !todo.complete);
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
     return {
       todos: updatedTodos,
     };
   }
   if (action.type === 'DELETE_ALL_TODO') {
+    let updatedTodos = [...state.todos];
+    updatedTodos = [];
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
     return {
-      todos: [],
+      todos: updatedTodos,
     };
   }
   return defaultTodoState;
