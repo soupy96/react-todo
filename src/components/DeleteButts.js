@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import styled from 'styled-components';
 
 import TodoContext from '../store/todo-context';
 import DeleteAllTasks from './DeleteAllTasks';
