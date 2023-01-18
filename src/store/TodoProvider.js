@@ -5,7 +5,7 @@ import TodoContext from './todo-context';
 const localTodos = JSON.parse(localStorage.getItem('todos'));
 
 const defaultTodoState = {
-  todos: localTodos,
+  todos: localTodos ? localTodos : [],
 };
 
 const todoReducer = (state, action) => {
