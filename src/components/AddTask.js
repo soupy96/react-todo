@@ -15,6 +15,7 @@ const AddTask = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!value.trim()) {
+      alert('Please enter a valid todo task.');
       return;
     }
     let numId = todoId;
