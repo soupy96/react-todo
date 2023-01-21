@@ -15,7 +15,7 @@ const SingleTask = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!value) {
+    if (!value.trim()) {
       alert('Please enter a valid todo task.');
       return;
     }
