@@ -14,7 +14,7 @@ const AddTask = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!value) {
+    if (!value.trim()) {
       return;
     }
     let numId = todoId;
